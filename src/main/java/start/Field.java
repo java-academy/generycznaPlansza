@@ -3,10 +3,10 @@ package start;
 /**
  * @author Jakub Czajka
  */
-class Field {
-  private String fieldValue;
+class Field <S extends FieldContainer>{
+  private S fieldValue;
 
-  public String getFieldValue() {
+  public S getFieldValue() {
     return fieldValue;
   }
 }

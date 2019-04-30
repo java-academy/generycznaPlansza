@@ -5,20 +5,21 @@ import java.util.List;
 /**
  * @author Jakub Czajka
  */
-class Board  {
+class Board <V,T extends PrintModel<V>,S extends FieldContainer> {
+  private List<Field<S>> fields;
+  private T printModel;
   int length;
-  int heigth;
-  private List<Field> fields;
+  int height;
 
-  public Board(List<Field> fields) {
+  Board(List<Field<S>> fields, T printModel) {
     this.fields = fields;
+    this.printModel = printModel;
   }
 
-  String getFieldInfo(int fieldNumber){
-    return fieldNumber+"";
+  V getFieldInfo(int fieldNumber){
+    return printModel.getInfo(fieldNumber);
   }
-
-  Field getField(int fieldNumber){
-    return fields.get(fieldNumber);
+  S getField(int fieldNumber){
+    return fields.get(fieldNumber).getFieldValue();
   }
 }

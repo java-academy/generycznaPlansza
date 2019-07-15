@@ -1,23 +1,22 @@
 package workshop;
 
 /**
- * Task 1 summary:
+ * Podsumowanie Zadania1:
  *
- * As You have seen, by using generics we have a compile type check which prevents ClassCastExceptions
- * and removes the need for casting.
+ * Jak widziałeś, używanie generyków pozwala kompilatorowi na sprawdzanie elementów przy dodawaniu
+ * zmniejszając szanse na ClassCastException, oraz redukuje konieczność ręcznego rzutowania.
  *
- * The other advantage is to avoid code duplication.
- * Without generics, we have to copy and paste the same code but for different types.
- * With generics, we do not have to do this. We can even implement algorithms which apply to generic types.
- * Think about collections - having specific ArrayLists for Strings, ints ect. would be... problematic
+ * Inną zaletą generyków jest ograniczenie powtórzeń kodu.
+ * Bez generyków byliśmy zmuszeni do duplikowania kodu dla różnych typów, lub używania Object jako typu
+ * referencyjnego narażając się na CCE.
  *
- * Task 2 summary:
+ * Podsumowanie Zadania2:
  *
- * In second task You've created generic class! Yey!
- * Also, You have learned that you can't instantiate array of generic type, because
- * it's type is unknown at runtime... but why? Why is it unknown?
+ * Napisałeś kilka parametryzowanych klas i metod.
+ * Dowiedziałeś się również, że nie możesz stworzyć tablicy typu generycznego, ponieważ
+ * w Runtimie nie możesz dokładnie określić typu... Ale w sumie dlaczego?
  *
- * Let's talk about Type Erasure
+ * Czas na wymazywanie typów.
  *
  * @author Wojciech Makiela
  */
@@ -25,53 +24,43 @@ public class Zadanie3 {
 
     public static void main(String[] args) {
         /*
-        In task 1 you've created code in 'java 4 style'
-        and project still compiles
-        Its because java is backwards compatible
+        W ramach pierwszego zadania napisałeś kod działający w Javie 1.4.
+        Po przekopiowaniu do tego repo (gdzie pracujemy na nowszej Javie) kod dalej działał.
+        To dzięki kompatybilności wstecznej.
 
-        IMPORTANT: I have no coding for you in this section.
-        If you want, feel free to use 'javap -c' on your classes, in order to see java bytecode
-        Bytecode should be the same, or just slightly of (depends on your implementation).
+        Żeby skutecznie pracować z generykami należy zrozumieć, że informacja o typach parametryzowanych jest
+        dostępna tylko dla kompilatora - wirtualna maszyna Javy nie ma dostępu do tej informacji.
+        Innymi słowy, wymazywanie typów (ang. "type erasure") oznacza, że informacje o generykach nie są dostępne
+        podczas działania programu (Runtime), ponieważ zostały usunięte podczas kompilacji.
 
-        Why?
+        Jaki jest sens wymazywania typów?
+        Odpowiedź jest prosta - by zachować kompatybilność wsteczną.
+        Przed wprowadzeniem generyków kolekcje używały obiektów (Object). Po wprowadzeniu generyków pojawił się problem.
+        Potrzebne było rozwiązanie, które po skompilowaniu (w postaci bytecodu) będzie wyglądać tak samo
+        zarówno z, jak i bez generyków.
+        Kod maszynowy powstały w wyniku kompilacji kodu parametryzowanego będzie wyglądał tak, jakby generyki
+        nie istniały.
 
-        It’s important to realize that generic type information is only available to the compiler, not the JVM.
-        In other words, 'type erasure' means that generic type information is not available to the JVM at runtime,
-        because during compilation all information about generics is removed.
+        Jak to działa?
+            Kompilator zamienia typy parametryzowane na obiekty (Object).
+            Zamienia typy ograniczone (o nich później) na pierwszą klasę ograniczającą.
+            Dodaje rzutowanie przy wyciąganiu elementów parametryzowanego typu.
 
-        for all You nerds out there:
-
-            if (currentTime.isCompileTime) {
-                generics.setAvailable(true);
-            } else if (currentTime.isRunTime) {
-                generics.setAvailable(false);
-            }
-
-        The reasoning behind erasure is simple:
-        preserving backward compatibility with older versions of Java.
-        When a generic code is compiled into bytecode, it will be as if the generic type never existed.
-        This means that compilation will:
-
-            Replace generic types with objects
-            Replace bounded types (More on these in a later sections) with the first bound class
-            Insert the equivalent of casts when retrieving generic objects.
-
-        Or to put it in simpler way.
-            List l = new ArrayList();
-            List<String> l = new ArrayList<String>();
-        No matter which line you use, your bytecode will stay the same.
+            Na przykładzie:
+                List l = new ArrayList();
+                List<String> l = new ArrayList<String>();
+            Niezależnie której linijki użyjesz, bytecode będzie taki sam;
 
 
-        One last thing:
+        PS.
 
             List l = new ArrayList();
 
-        Despite being able to compile, it’s still likely that there will be a warning from the compiler.
-        This is because we are losing the extra compile time check that we get from using generics.
+        Mimo tego, że taki kod się skompiluje, to prawdopodobnie dostaniesz ostrzeżenie od kompilatora.
+        Jest to spowodowane utratą dodatkowych sprawdzeń podczas kompilacji które dają nam generyki.
 
-        The point to remember is that while backward compatibility and type erasure
-        make it possible to omit generic types, it is bad practice.
-
+        Do zapamiętania: mimo tego że dzięki kompatybilności wstecznej możemy pisać z użyciem typów surowych
+        (czyli domyślnego Object), to nie powinniśmy tego używać, ponieważ jest to zła praktyka.
         */
     }
 }

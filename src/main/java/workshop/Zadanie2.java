@@ -1,102 +1,107 @@
 package workshop;
 
 /**
- * Generics!1!!
+ * <h1>Generyki!!!</h1>
  * <p>
- * Below you have Zadanie2 class. Make it Generic.
- * I want it to store 2 types. 'T' and 'S', that I can declare however I want.
- * Currently it accepts only T. Fix that!
- *
- * You can put extra types in same angle brackets ('<>'), by separating them with a comma
+ * Poniżej masz klasę Zadanie2. Ugenerycznij ją!
+ * Chcę aby przechowywała ona 2 zmienne. Jedną typu T, a drugą typu S.
+ * Aktualnie przyjmuje tylko jeden typ parametryzowany. Napraw to!
+ * <p>
+ * Możesz zdefiniować dodatkowe typy dopisując je po przecinku w nawiasach ostrokątnych ('<>').
  *
  * @author Wojciech Makiela
  */
 public class Zadanie2<T> {
 
-    // TODO - T and S fields
-    private final T myFieldOfTypeT;
+    // TODO - pola typu S
+    final T poleTypuT;
 
 
-    // TODO - fix constructor - accept 2 variables - T and S
-
-    public Zadanie2(T varOfTypeT) {
-        // TODO - assign variables passed to constructor to fields
-        this.myFieldOfTypeT = varOfTypeT;
+    // TODO - popraw konstruktor. Ma przyjmować 2 zmienne - typu T i S
+    public Zadanie2(T zmiennaTypuT) {
+        this.poleTypuT = zmiennaTypuT;
     }
 
     /*
-    So what the function happened here?
-    Right now you should have a class Zadanie2 that accepts two custom parameters of types <T, S>
-    You have created 2 fields of types T and S, and initialized them in constructor.
-    This allows us to store pair of any objects.
+    Jeśli skończyłeś, to odpal testy (klasa Zadanie2Test). Były zakomentowane, co by się kompilowało.
 
-    When to use that?
-    Let's say you are creating Tic-tac-toe game (for example).
-    In that game you might find pairing 'Player' and 'Symbol' objects very useful.
-    To do that, you create new class PlayerSymbolPair.
-    But then you think that you also want to have pairs of type 'Players' and 'TTTGame'.
-    To do that, you create new class PlayersTttGamePair.
-    But then you think that... you get the point.
+    if (testy.przechodzą()) continue;
+    else return;
 
-    Creating multiple classes with basically same functionality, but with different types of fields leads
-    to dirty and buggy code.
+    No to co. Wiesz już co zrobić, twoje klasy były parametryzowane. Nice.
+    Klasa Zadanie2 łączy parę obiektów pod swoimi skrzydłami. Fajnie...
 
-    Luckily, with the power of generics you can create single class Pair<T, S> that will help you out!
-    What a time to be alive!
+    ...Ale po co?
 
-    If something will require changing its type, generify it!
+    Wyobraźmy sobie, że piszesz grę w kółko i krzyżyk (na przykład).
+    Teraz wydaje Ci się, że sparowanie obiektów Gracza i Symbolu może być przydatne, a nie chcesz
+    żeby Gracz miał Symbol (w imię Single Responsibility Principle).
+    A więc robisz klasę ParaGraczSymbol i wszystko fajnie działa.
+    ...
+    Teraz wydaje Ci się, że chcesz mieć parę obiektów Gracze i GraKiK.
+    A więc robisz klasę ParaGraczeGraKiK i wszystko fajnie działa.
+    ...
+    Teraz wydaje Ci się... wiesz do czego dążę.
 
-    Next task for you:
-    Create new class called 'Bundle'
-    It should store 3 different values! 2 of which should be generic;
-    Third element should be ALWAYS of type List<String>! (Don't try to generify it (yet). Just hardcode its type)
+    Tworzenie wielu klas z tą samą funkcjonalnością, ale innymi polami prowadzi do brzydkiego,
+    zbugowanego kodu.
 
-    Once you're done, test your implementation:
-    List<String> strings = Arrays.asList("a", "b", "c");
-    Bundle<String, Integer> b = new Bundle("first", 2, strings);
-    assert b.getFirst().equals("first");
-    assert b.getSecond() == 2;
-    assert strings == b.getStrings();
+    Na szczęście, dzięki mocy generyków, możesz stworzyć jedną klasę Para<T, S> która zrobi wszystko czego Ci trzeba!
+
+    */
+}
 
 
-    New task! Yey!
-    Now something tricky. I want Zadanie2 class to store an array of T's
+class Wór {
+
+    /*
+    Następne zadanie - klasa Wór - powtórka z tworzenia klas generycznych. 5 minut roboty :P
+
+    Nasz worek powinien zawierać 3 zmienne.
+    2 parametryzowane (generyczne) o nazwach 'Pierwszy' i 'Drugi', i jedną listę stringów.
+    Nie musisz użyć dokładnie tych nazw, ale testy zakładają użycie getterów po takie właśnie
+    zmienne, więc możesz użyć IDE do automatycznej generacji kodu.
+
+    Testy znajdziesz w klasie WórTest.
+
+    ...
+
+    No i dobra. Było kodzone, teraz trochę teorii.
+    Wrócimy na moment do klasy Zadanie2. Dodaj w jej konstruktorze taką linijkę:
 
         T[] ts = new T[10];
 
-    Copy-paste that line to constructor. Once you see that it doesn't work, delete it and continue reading ;)
+    Otrzymasz błąd kompilacji. Lekcja na dziś - nie da się stworzyć tablicy typu generycznego.
+    Dlaczego?
 
-    Each object in Java has a "class" which can be retrieved at runtime,
-    using the .getClass() method. Arrays of different component types correspond
-    to different array classes. So .getClass() called on an int array will
-    return a different thing than .getClass() called on a String array.
+    Każdy obiekt w Javie zna swoją klasę, którą można podejrzeć w trakcie działania aplikacji (dalej zwanym Runtime)
+    za pomocą metody '.getClass()'. Tablice różnych typów odpowiadają różnym klasom. Po ludzku:
 
-    How does an object know its class? That's because it was provided
-    when the object was created. The same applies for array objects.
-    When you create an array, you must(!) specify the type of array, including
-    an explicit component type. However, when you have a type variable like T,
-    code that uses that type cannot know what type T is; and in fact,
-    the point is that the code must work with any type in the place of T.
-    That is why the class or method is said to be "generic".
-    Thus you cannot create an array of T since you cannot provide the component
-    type needed to create the array.
+        mojaTablicaIntów.getClass() != mojaTablicaStringów.getClass(); // true
 
-    Whoa. That's a lot of knowledge. You're doing great! (I hope)
-    Last one thing before we leave generic arrays alone. Even though you cannot
-    create array of generic type, you can create array of Objects, and cast it.
-    T[] ts = (T[]) new Object[10];
-    It's shady, but it works!... Still. Do not do that.
+    Ale skąd obiekt wie, jaką klasę reprezentuje? Ta informacja jest dostarczana w momencie tworzenia obiektu.
+    To samo tyczy się tablic (wszak tablice są obiektami). Co za tym idzie, podczas tworzenia tablicy musisz
+    dokładnie wyznaczyć jakie elementy będą w niej przechowywane.
 
+    I tutaj pojawia się problem. Informacje o T tracone są w trakcie kompilacji (o wymazywaniu typów w następnym zadaniu).
+    Próbując w Runtimie stworzyć tablicę (T[]) nie wiesz czym tak naprawdę jest 'T', a więc nie jesteś w stanie
+    dostarczyć wymaganej informacji o klasie którą reprezentować ma nasza tablica.
 
-    Interesting fact:
-    Generics have naming convention!
-        E - Element (used extensively by the Java Collections Framework)
+    Ciekawostka:
+    Generyki mają konwencję nazewnictwa!
+        E - Element
         K - Key
         N - Number
         T - Type
         V - Value
-        S,U,V etc. - 2nd, 3rd, 4th types after T is used
+        S,U,V etc. - drugi, trzeci itd element po 'T'.
 
+    Dobra rada - nie stosujcie się do niej - przynajmniej nie podczas pisania.
+    Kiedy pojawia się wiele generyków w wielu klasach, i wszędzie mają te same (jednoliterowe) nazwy reprezentujące
+    różne rzeczy, łatwo się pogubić.
+    Polecam (przynajmniej na czas pisania kodu - potem można zmienić) używać opisowych nazw.
 
      */
+
 }
+

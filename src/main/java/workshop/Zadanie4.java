@@ -17,7 +17,7 @@ package workshop;
  *
  * @author Wojciech Makiela
  */
-public class Task4 {
+public class Zadanie4 {
 
     interface Cloneable<T> {
         T createClone();

@@ -3,7 +3,7 @@ package workshop;
 /**
  * Generics!1!!
  * <p>
- * Below you have Task2 class. Make it Generic.
+ * Below you have Zadanie2 class. Make it Generic.
  * I want it to store 2 types. 'T' and 'S', that I can declare however I want.
  * Currently it accepts only T. Fix that!
  *
@@ -11,7 +11,7 @@ package workshop;
  *
  * @author Wojciech Makiela
  */
-public class Task2<T> {
+public class Zadanie2<T> {
 
     // TODO - T and S fields
     private final T myFieldOfTypeT;
@@ -19,14 +19,14 @@ public class Task2<T> {
 
     // TODO - fix constructor - accept 2 variables - T and S
 
-    public Task2(T varOfTypeT) {
+    public Zadanie2(T varOfTypeT) {
         // TODO - assign variables passed to constructor to fields
         this.myFieldOfTypeT = varOfTypeT;
     }
 
     /*
     So what the function happened here?
-    Right now you should have a class Task2 that accepts two custom parameters of types <T, S>
+    Right now you should have a class Zadanie2 that accepts two custom parameters of types <T, S>
     You have created 2 fields of types T and S, and initialized them in constructor.
     This allows us to store pair of any objects.
 
@@ -60,7 +60,7 @@ public class Task2<T> {
 
 
     New task! Yey!
-    Now something tricky. I want Task2 class to store an array of T's
+    Now something tricky. I want Zadanie2 class to store an array of T's
 
         T[] ts = new T[10];
 

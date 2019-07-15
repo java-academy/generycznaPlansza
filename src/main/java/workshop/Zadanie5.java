@@ -13,7 +13,7 @@ import java.util.List;
  *
  * @author Wojciech Makiela
  */
-public class Task5 {
+public class Zadanie5 {
 
     // Yeah. I know. Copy-paste development.
     // BUT! New methods are were introduced! Take a look

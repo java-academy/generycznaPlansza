@@ -21,7 +21,7 @@ package workshop;
  *
  * @author Wojciech Makiela
  */
-public class Task3 {
+public class Zadanie3 {
 
     public static void main(String[] args) {
         /*

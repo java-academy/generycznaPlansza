@@ -17,7 +17,7 @@ import java.util.function.Consumer;
  *
  * @author Wojciech Makiela
  */
-public class Task6 {
+public class Zadanie6 {
 
     static class Singer {
         private String genre;

@@ -4,7 +4,7 @@ package workshop;
  * Time for a Test!
  *
  */
-public class Task7 {
+public class Zadanie7 {
     /*
         1. What Are Some Advantages of Using Generic Types?
         2. What is Type Erasure?

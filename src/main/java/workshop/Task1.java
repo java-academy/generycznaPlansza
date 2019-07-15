@@ -1,105 +1,107 @@
 package workshop;
-
-
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Times before generics
- * <p>
- * 1. Create NEW project and run Java 4 (this repo has code written in Java8, so you
- * can't simply change version of this project)
- * 2. Copy and implement method workWithList()
- * 3. See that its bad
- * 4. Copy paste it back here - Java 8
- * 5. Make sure it still compiles
- * 6. Implement method workWithGenericList()
- * 7. Compare implementations
- * 8. Read summary below
+ * <h1>Czasy przed generykami</h1>
+ *
+ * <ol>
+ *     <li>Stwórz nowy projekt w którym będziesz pracować na javie 4. #mantra</li>
+ *     <li>Skopiuj i wklej tam metodę `róbRzeczyZListą()`.</li>
+ *     <li>Zaimplementuj ją, i zobacz, jak straszne były czasy javy 4.</li>
+ *     <li>Zaimplementowaną metodę wklej tutaj - jeśli nic nie skopałeś, to powinna się kompilować!</li>
+ *     <li>Zaimplementuj metodę `róbRzeczyZGenerycznąListą()`</li>
+ *     <li>Porównaj implementacje tych metod, a następnie przeczytaj podsumowanie na dole.</li>
+ * </ol>
  *
  * @author Wojciech Makiela
  */
 public class Task1 {
 
     public static void main(String[] args) {
-//        workWithList();
-//        workWithGenericList();
+        róbRzeczyZListą();
+        róbRzeczyZGenerycznąListą();
     }
 
-    static void workWithList() {
-        // Create new list, and call it 'strings'
+    static void róbRzeczyZListą() {
+        // Stwórz nową listę o nazwie 'strings'
 
-        // Add strings 'first' and 'second' to your list
+        // Dodaj do niej elementy: 'pierwszy' i 'drugi'
 
 
-        // Be a naughty boy/girl, and add an Integer '3'
-        // Remember. Autoboxing (automatic converting primitives to corresponding Wrapper objects) was
-        // introduced in Java5, so you must use 'new Integer(3)', not just '3'
+        // Bądź niegrzecznym chłopcem i dodaj do listy 'new Integer(3)'
+        // Autoboxing pojawił się w Javie 5, więc trzeba ręcznie zapakować '3' w 'new Integer'
 
-        // I know it looks bad, but keep going
-        // Get first element from your list, and assign it
-        // to a variable of type String
-        // In Java4 all lists were considered lists of objects
-        // In order to assign element from collection to variable of type other than Object
-        // you must use Casting
-        String first; //{YourCode - get element 0 and cast it to (String)}
+        // Wygląda to źle, a IntelliJ nie pokazuje błędu...
+        // Przypał wisi w powietrzu, ale kontynuuj
 
-        // Do the same for last element
-        String last; //{YourCode - get last element and cast it to (String)}
+        // Wyciągnij pierwszy element z listy, i przypisz go do zmiennej typu 'String'
+        String pierwszy; // = strings.get(0);
 
-        // Run the method -> You should get ClassCastException
+        // No i przypał. Błąd kompilacji. IntelliJ świeci czerwienią. W tle słychać syreny.
+        // Przed wprowadzeniem generyków wszystkie kolekcje były kolekcjami obiektów.
+        // Co za tym idzie - by przypisać nasz pierwszy element do zmiennej typu 'String' trzeba
+        // użyć rzutowania! Dodaj je teraz.
+
+
+        // No to co. Teraz zrób to samo dla ostatniego elementu (naszego Integera).
+        String ostatni; // (String) strings.get(2);
+
+        // Po odpaleniu metody powinien pojawić się wyjątek ClassCastException.
+        // Robota w Javie 4 skończona. Wróć do warsztatowego repo.
     }
 
-    static void workWithGenericList() {
-        // Create new list of type <String>, and call it 'strings'
+    static void róbRzeczyZGenerycznąListą() {
+        // Stwórz listę parametryzowaną typem 'String' i nazwij ją 'strings'
 
-        // Add strings 'first' and 'second' to your list
+        // Dodaj do niej elementy: 'pierwszy' i 'drugi'
 
 
-        // Be a naughty boy/girl, and add an Integer '3'
+        // Bądź niegrzecznym chłopcem i dodaj do listy 'new Integer(3)'
 
         // Hah! Compile error!
-        // Comment that line so it compiles again
+        // Zakomentuj tą linijkę tak, żeby dalej się kompilowało.
 
-        // Get first element from your list, and assign it
-        // to a variable of type String
+        // Wyciągnij pierwszy element z listy, i przypisz go do zmiennej typu 'String'
+        String pierwszy; // = strings.get(0);
 
-        // Run the method
+        // Uruchom metodę.
     }
 
     /**
-     * SUMMARY:
-     * Before you start reading, make sure you have finished first 7 steps listed above class declaration
+     * <h1>Podsumowanie:</h1>
      * <p>
-     * Now you should have 2 similar implementations. One that uses Generics, and one that does not.
-     * If you couldn't implement first method in plain Java4 style (because of reasons i guess),
-     * then feel free to copy-paste it from 'java4Code.txt' file available in resources folder.
+     * Powinieneś teraz mieć 2 podobne implementacje. Jedną z użyciem generyków, a drugą w stylu retro.
+     * Jeśli nie mogłeś napisać kodu w Javie 4 (z powodu przyczyn jak mniemam),
+     * to przeklej tutaj gotowca dostępnego w katalogu resources w pliku 'RetroJava'.
+     * </p>
      * <p>
-     * Quick info: I'll keep talking about lists only, but same rules apply to all collections in java.
-     * <p>
-     * As you already know - before Java 1.5 (in which generics were introduced)
-     * all lists were lists of objects.
-     * There was no type check at compile time, so you could add anything to any list.
-     * When retrieving data from list you had to use casts that might fail.
-     * <p>
-     * Generics allow us to define type of elements stored in list. Information about type allows compiler
-     * to do checks for us in compile, effectively reducing number of class cast exceptions.
-     * <p>
-     * How it works?
+     * Jak już wiesz, przed Javą 1.5 wszystkie kolekcje zawierały obiekty (Object).
+     * Jako że wszystko w Javie jest obiektem, lub ma obiektowy odpowiednik (siema prymitywy), to
+     * kolekcje były reużywalne.
+     * Problem był jednak taki, że nie mogliśmy narzucać ograniczeń na to, co trafia do naszej kolekcji,
+     * co mogło być źródłem wyjątków podczas wyciągania jej elementów.
+     * </p>
+     * I wtedy weszły one - Generyki. Bohaterowie na których zasługiwaliśmy.
+     * Generyki pozwalają nam ograniczać typy elementów dodawanych do kolekcji, jak i dają znać kompilatorowi
+     * jak dodać rzutowanie - czytaj dalej.
      */
     private static void howItWorks() {
-        // <String> tells compiler that we want to store only Strings in given list
+        // <String> mówi kompilatorowi, że w naszej liście będą tylko instancje klasy 'String'
         List<String> strings = new ArrayList<>();
 
-        // Having information about type, it checks variables that are being added to a list
-        // and prevents adding anything of different type.
-        strings.add("first");
-//        strings.add(3); // Compiler error
+        // Kompilator uwzględnia tę informację i dokonuje sprawdzenia, czy elementy wkładane
+        // do kolekcji są odpowiedniego typu.
+        strings.add("pierwszy");
+//        strings.add(new Integer(3)); // Błąd kompilacji
 
-        // Retrieving data before generics required manual casting
-        // Now compiler knows type of variables in list, so it 'adds' casts in compile time
-        // After all, cast still exists in bytecode, but it's not in source code
-        // This makes code cleaner and easier to understand
+        // Wyciąganie elemetów przed Javą 1.5 wymagało ręcznego rzutowania.
+        // Aktualnie kompilator sam dodaje odpowiednie rzutowanie w czasie kompilacji.
+        // Finalnie bytecode wygenerowany podczas kompilacji zawiera informacje o rzutowaniach,
+        // mimo tego, że nie ma ich w kodzie. Sprawia to, że kod źródłowy jest czystszy i łatwiejszy do zrozumienia.
         String first = strings.get(0);
+
+        // Ale skoro lista ma 'Stringi', to po co tu rzutowanie? Coś mi tu śmierdzi...
+        // O tym później. Najpierw trochę koderki z generykami, aby utrwalić zdobytą wiedzę.
     }
 }

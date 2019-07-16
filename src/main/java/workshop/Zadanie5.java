@@ -5,86 +5,86 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
- * Generic Inheritance!
+ * Dziedziczenie a generyki!
  * <p>
- * Now. We have army of Singers!
- * Lets find out what we can do with them!
+ * Koniec z klonowaniem. Wokalistów i tak jest za dużo.
+ * Ale co z nimi zrobić? Może by ich tak sys.outnąć?
  * <p>
  *
  * @author Wojciech Makiela
  */
 public class Zadanie5 {
 
-    // Yeah. I know. Copy-paste development.
-    // BUT! New methods are were introduced! Take a look
-    static class Singer {
-        private String genre;
+    static class Wokalista {
+        private String gatunekMuzyczny;
 
-        Singer(String genre) {
-            this.genre = genre;
+        Wokalista(String gatunekMuzyczny) {
+            this.gatunekMuzyczny = gatunekMuzyczny;
         }
 
         @Override
         public String toString() {
-            return "Singer{" +
-                    "genre='" + genre + '\'' +
+            return "Wokalista{" +
+                    "gatunekMuzyczny='" + gatunekMuzyczny + '\'' +
                     '}';
         }
     }
-    static class ElvisPresley extends Singer {
 
-        ElvisPresley(String genre) {
-            super(genre);
+    static class ElvisPresley extends Wokalista {
+
+        ElvisPresley() {
+            super("Rock'n'Roll");
         }
     }
 
-    private static void workWithSingers(List<Singer> singers) {
-        for (Singer singer : singers) {
-            System.out.println(singer);
+    private static void wyświetlWokalistów(List<Wokalista> wokaliści) {
+        for (Wokalista wokalista : wokaliści) {
+            System.out.println(wokalista);
         }
     }
 
     public static void main(String[] args) {
-        // Take a look at workWithSingers method. Uncomment lines 54 and 55 - see what happens
-        List<Singer> singers = Arrays.asList(new Singer("Rock"), new Singer("Blues"));
-        workWithSingers(singers);
-        List<ElvisPresley> presleyList = Arrays.asList(new ElvisPresley("Rock'n'Roll"));
-//        workWithSingers(presleyList);
+        List<Wokalista> jacyśWokaliści = Arrays.asList(
+                new Wokalista("Rock"),
+                new Wokalista("Blues"));
+        wyświetlWokalistów(jacyśWokaliści);
+
+        List<ElvisPresley> listaZPresleyem = Arrays.asList(new ElvisPresley());
+//        wyświetlWokalistów(listaZPresleyem);
 
         /*
-        Done? Great! Compile error! My favourite!
-        So... Even though Elvis is a Singer, you cannot pass List<ElvisPresley> to workWithSingers method.
-        It's because List<Elvis> is NOT a subtype of List<Singer>. Why? Consider following code
+        No to co. Mamy listę jakichś wokalistów. Wrzucamy ją do 'wyświetlWokalistów' i wszystko fajnie działa.
+        Robimy sobie listę Elvisów i próbujemy wyświetlić ich (odkomentowanie
+        linijki 'wyświetlWokalistów(listaZPresleyem);'). No i przypał. Błąd kompilacji.
 
-            List<Integer> ints = Arrays.asList(1, 2);
-            List<Number> nums = ints; // this is where compile error would happen, but keep lets going
-            nums.add(3.14);
-            ints.toString().equals("1, 2, 3.14"); // whoops! A double in our its list! o.O
+        W obu przypadkach jest taka sama lista. Różnią się tylko typem parametru. Jeśli zmienimy typ listyZPresleyem
+        na List<Wokalista>, to będzie działać. Tylko dlaczego List<ElvisPresley> nie jest podtypem List<Wokalista>?
+        Odpowiedź w kodzie:
 
-        Assigning list of ints to List<Number> variable will cause CompileError, because this might lead to
-        breaking initial list -> list of ints having double in it.
-        After all, you can add a Double to list of Numbers.
-        In that example, List<Number> extends Object, and List<Integer> extends Object,
-        thus our lists do not have parent-child relation - they are siblings.
-        And as You already know, You can not assign variable of type A, to variable of type B
-        unless A extends B.
+            List<Integer> ints = Arrays.asList(1, 2); // Robimy listę Integerów
+            List<Number> nums = ints;                 // Tutaj jest błąd kompilacji, ale teraz go ignorujemy.
+            nums.add(3.14);                           // Double rozszerza Number, więc da się dodać.
+            ints.toString().equals("1, 2, 3.14");     // MamyPrzypałException! Double w liście Integerów
 
-        Same goes with List<ElvisPresley>. We don't want Lady Gaga in that list.
+        Przypisanie listy Integerów do zmiennej typu List<Number> powoduje błąd kompilacji, ponieważ może to
+        doprowadzić do zepsucia pierwszej listy (Double w liście Integerów).
 
-        Since You already know that inheritance in generics is not that easy, let's fix our 'workWithSingers'
-        method, so it accepts any list of singers.
-        To do that, you will use something called "wildcard". Start with changing declaration of our method to:
+        W tym przykładzie rodzicem List<Number> i List<Integer> jest Object - są rodzeństwem, a jak zapewne wiesz
+        zmienną 'A' można przypisać do zmiennej typu 'B' tylko i wyłącznie gdy 'A' jest dzieckiem 'B'.
 
-            private static void workWithSingers(List<?> singers)
 
-        I know that it looks weir, but it is valid java syntax
-        Copy-paste and see.
-        A wildcard type represents an unknown type.
-        Here, we are specifying a list which could be of any type.
+        No. To skoro już masz śladowe pojęcie na temat dziedziczenia przy generykach, to naprawisz 'wyświetlWokalistów'.
+        Chcemy, by przyjmowała dowolną listę Wokalistów.
+        Aby to osiągnąć użyjemy symbolu nieoznaczonego (ang. "wildcard"). Zacznijmy od zmany deklaracji naszej metody.
 
-        Not quite what we wanted. 'workWithSingers' should accept only Singers, and now you can pass
-        any list and it will work. But now you can fix it easily, can't you?
-        HINT: extends keyword might be useful
+            private static void wyświetlWokalistów(List<?> wokaliści)
+
+        Jeśli pierwszy raz widzisz ten zapis, może on się wydawać "jakiś dziwny", ale to prawidłowa składnia Javy.
+        Kopiuj-wklej i się przekonaj.
+
+        Wildcard reprezentuje nieznany / dowolny typ. Zostawiony sam sobie (bez żadnych ograniczeń) symbolizuje Object.
+        Nie do końca to co chcieliśmy, więc po raz kolejny dzięki słówku 'extends' uratujemy świat!
+        // Nie modyfikuj zawartości metody 'wyświetlWokalistów', tylko jej deklarację.
          */
     }
 }

@@ -7,112 +7,120 @@ import java.util.List;
 import java.util.function.Consumer;
 
 /**
- * Bounded Parameters! Part 2!
- * <p>
- * Now.
- * We have army of Singers!
- * We know how to use them!
- * <p>
- * Time to do something ;)
+ * Typy ograniczone! Część 2!
+ *
+ * Ograniczałeś już generyki od góry. Fajnie.
+ * Ale czy wiedziałeś, że można je również ograniczyć od dołu?
  *
  * @author Wojciech Makiela
  */
 public class Zadanie6 {
 
-    static class Singer {
-        private String genre;
+    static class Wokalista {
+        private String gatunekMuzyczny;
 
-        Singer(String genre) {
-            this.genre = genre;
+        Wokalista(String gatunekMuzyczny) {
+            this.gatunekMuzyczny = gatunekMuzyczny;
         }
 
         @Override
         public String toString() {
-            return "Singer{" +
-                    "genre='" + genre + '\'' +
+            return "Wokalista{" +
+                    "gatunekMuzyczny='" + gatunekMuzyczny + '\'' +
                     '}';
         }
     }
-    static class ElvisPresley extends Singer {
+
+    static class ElvisPresley extends Wokalista {
 
         ElvisPresley() {
-            super("Rock n' Roll");
+            super("Rock'n'Roll");
         }
-
     }
 
-    private static void workWithSingers(List<? extends Singer> singers, Consumer<Singer> consumer) {
-        for (Singer singer : singers) {
-            consumer.accept(singer);
+    private static void róbCośZWokalistami(List<? extends Wokalista> wokaliści, Consumer<Wokalista> consumer) {
+        for (Wokalista wokalista: wokaliści) {
+            consumer.accept(wokalista);
         }
     }
 
     public static void main(String[] args) {
 
         /*
-        We already had method that accepts any type of Singer
-        Now, lets update the way it behaves.
+        Wcześniej napisałeś metodę, która wyświetla wokalistów.
+        Zamiast tego użyjmy konsumenta - pozwoli nam to na polimorfizm zachowań!
          */
 
-        Consumer<Singer> convertToKPopStar = singer -> singer.genre = "KPop";
-        List<Singer> singers = Arrays.asList(new ElvisPresley());
-        workWithSingers(singers, convertToKPopStar);
-        System.out.println(singers.get(0).genre); // Elvis is now KPop star! Oh no!
+        Consumer<Wokalista> zamieńNaGwiazdęKPopu = wokalista -> wokalista.gatunekMuzyczny = "KPop";
+        List<Wokalista> wokaliści = Arrays.asList(new ElvisPresley());
+        róbCośZWokalistami(wokaliści, zamieńNaGwiazdęKPopu);
+        System.out.println(wokaliści.get(0).gatunekMuzyczny); // Elvis jest teraz gwazdą KPop! Oh no!
 
         /*
-        Quick info about Consumer
-        It accepts parameter of given type (Singer in this case), and processes it in one way or another
+        Szybkie przypomnienie czym jest konsument.
+        Interfejs funkcyjny -> przyjmuje pewien parametr (w tym przypadku Wokalista) i go obrabia w pewien sposób.
          */
 
-        // But here's the problem
+        // No ale jest problem. Oczywiście, że jest jakiś problem...
         Consumer<Object> print = System.out::println;
-//        workWithSingers(singers, print); // Compile error! Uncomment to check it out!
+//        róbCośZWokalistami(wokaliści, print); // Błąd kompilacji - odkomentuj i się przekonaj!
 
         /*
-            I know that Singer can be printed.
-            You know that too.
-            But the compiler does not.
-            It expects Consumer of Singers, not a Consumer of Objects.
-            What to do now? <T extends Singer>? Maybe <?>?.
-            Damn it. It's not working! What to do, what to do...
-            If we use 'extends', it's expecting a subclass of a Singer. But we don't need a subclass.
-            We need a super class!
 
+        Dobrze wiem, że wokalistę da się sys.outnąć.
+        Ty też to wiesz.
+        Ale kompilator niestety nie. A przynajmniej tak to wygląda.
 
-            For now, you were using 'extends' only - defining an "Upper Bound" of type parameter.
-            Or in other words, You were defining the 'highest possible' class in inheritance/family tree
+        Nasza metoda przyjmuje konsumenta wokalistów (dalej zwany kanibalem), a nie konsumenta obiektów.
+        I co tu zrobić?
+        <T extends Wokalista>?
+        Może <?> ?
+        Cholibka. Nie działa. Co tu zrobić... wcale nie przeczytałeś dokumentacji na samej górze, i nie wiesz
+        że będziemy tu ograniczać generyki od dołu...
 
-                Object
-                   |
-                Singer
-                   |
-              ElvisPresley
+        Użycie 'extends' daje znać, że poszukujemy podklasy Wokalisty, ale w tym przypadku nie potrzebujemy podklasy.
+        Potrzebujemy nadklasy!
 
-            But now we need something above Singer, not below. In order to define "Lower Bound"
-            You must use 'super' keyword!
-            Example:
-            We have 'demo' method that accepts List<? super Integer>
-            Let's break that down:
-                List<?> - this will be a list of some type
-                <? super Integer> - given type will be superclass of Integer
-            As you can see below, 'demo' method accepts List<Integer>, List<Number> and List<Object>
-            (Integer extends Number and Number extends Object)
+        Do tej pory używałeś wyłącznie 'extends' - definicji górnej granicy parametru.
+        Innymi słowy wskazywałeś najwyższą (na drzewie dziedziczenia) dopuszczalną klasę.
+
+            Object
+               |
+            Wokalista
+               |
+          ElvisPresley
+
+        <T extends Wokalista> mówi, że możemy użyć Wokalisty, lub czegokolwiek pod nim na drzewie.
+
+        W tym przypadku jednak chcemy Wokalistę, lub cokolwiek powyżej - zdefiniować dolną granicę.
+        By to zrobić używamy słowa kluczowego 'super'.
+        Przykład:
+            Poniżej znajdziesz metodę 'demo', która przyjmuje parametr typu List<? super Integer>.
+            Przeanalizujmy ten zapis
+
+                List        - Przyjmujemy jakiś obiekt implementujący interfejs List.
+                <?          - Będzie ona przechowywać dowolne obiekty...
+                super       - ... będące nadklasą...
+                Integer>    - klasy Integer.
+
+            Wywołania metody 'demo' są zakomentowane tylko po to, by nie rozpraszać Cię podczas pierwszej części.
+            Odkomentuj je teraz i zobacz, że nasza metoda przyjmuje List<Integer>, List<Number>, oraz List<Object>.
          */
 
         List<Integer> integers = Arrays.asList(1,2,3,4,5);
-//        demo(integers);
+        demo(integers);
 
         List<Number> numbers = new ArrayList<>(integers);
         numbers.add(3.14);
-//        demo(numbers);
+        demo(numbers);
 
         List<Object> objects = new ArrayList<>(numbers);
         objects.add(new Object());
-//        demo(objects);
+        demo(objects);
 
 
-        // Once you analyze this example fix 'workWithSingers' method, so it accepts
-        // both Consumer<Singer> and Consumer<Object>
+        // Jak już przeanalizujesz co tu się odprzedsięwziewa, popraw metodę 'róbCośZWokalistami' tak,
+        // by przyjmowała zarówno kanibala, jak i konsumenta obiektów.
     }
 
     private static void demo(List<? super Integer> list) {

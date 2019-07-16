@@ -2,19 +2,23 @@ package workshop;
 
 
 /**
- * Typy ograniczone!
- *
- * Mamy 2 klasy: Wokalista, oraz ElvisPresley.
+ * <h1>Typy ograniczone!</h1>
+ * <p>
+ * Mamy takie klasy:
+ * <ul>
+ *     <li>Wokalista</li>
+ *     <li>ElvisPresley</li>
+ * </ul>
  * Niektórzy twierdzą, że Elvis nadal żyje, ponieważ został sklonowany.
- * // Im mniej o tym myślisz tym bardziej logiczne się to wydaje.
- *
+ * <p><i>// Im mniej o tym myślisz tym bardziej logiczne się to wydaje.</i></p>
+ * <p>
  * Zatem sprawimy, że nasza klasa ElvisPresley również będzie Klonowable.
- *
- * Ważna notka:
+ * <p>
+ * <b>Ważna notka:</b>
  * Proszę nie modyfikuj żadnych klas ani interfejsów, chyba że dalsze polecenia stanowią inaczej.
- *
+ * <p>
  * Zapoznaj się z interfejsem Klonowable, klasami Wokalista i ElvisPresley, oraz metodą 'main'.
- * W 'main' wywołana jest metoda 'klonujWokalistę'. Zaimplementuj ją zgodnie z instrukcjami.
+ * W 'main' wywołana jest metoda 'klonujWokalistę' -> zaimplementuj ją zgodnie z instrukcjami.
  *
  * @author Wojciech Makiela
  */

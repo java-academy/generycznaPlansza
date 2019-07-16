@@ -1,22 +1,22 @@
 package workshop;
 
 /**
- * Podsumowanie Zadania1:
- *
+ * <h1>Podsumowanie Zadania1:</h1>
+ * <p>
  * Jak widziałeś, używanie generyków pozwala kompilatorowi na sprawdzanie elementów przy dodawaniu
- * zmniejszając szanse na ClassCastException, oraz redukuje konieczność ręcznego rzutowania.
- *
- * Inną zaletą generyków jest ograniczenie powtórzeń kodu.
- * Bez generyków byliśmy zmuszeni do duplikowania kodu dla różnych typów, lub używania Object jako typu
- * referencyjnego narażając się na CCE.
- *
- * Podsumowanie Zadania2:
- *
+ * zmniejszając szanse na {@link ClassCastException}, oraz redukuje konieczność ręcznego rzutowania.
+ * <p><br/>
+ * <p>Inną zaletą generyków jest ograniczenie powtórzeń kodu.</p>
+ * Bez generyków byliśmy zmuszeni do duplikowania kodu dla różnych typów, lub używania {@link Object} jako typu
+ * referencyjnego narażając się na {@link ClassCastException}.
+ * <p><br/>
+ * <h1>Podsumowanie Zadania2:</h1>
+ * <p>
  * Napisałeś kilka parametryzowanych klas i metod.
  * Dowiedziałeś się również, że nie możesz stworzyć tablicy typu generycznego, ponieważ
  * w Runtimie nie możesz dokładnie określić typu... Ale w sumie dlaczego?
- *
- * Czas na wymazywanie typów.
+ * <p>
+ * <h2>Czas na wymazywanie typów!</h2>
  *
  * @author Wojciech Makiela
  */

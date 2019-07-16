@@ -5,10 +5,10 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
- * Dziedziczenie a generyki!
+ * <h1>Dziedziczenie a generyki!</h1>
  * <p>
  * Koniec z klonowaniem. Wokalistów i tak jest za dużo.
- * Ale co z nimi zrobić? Może by ich tak sys.outnąć?
+ * Ale co z nimi zrobić? Może by ich tak <i>sys.outnąć</i>?
  * <p>
  *
  * @author Wojciech Makiela

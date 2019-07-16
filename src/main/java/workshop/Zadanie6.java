@@ -7,8 +7,8 @@ import java.util.List;
 import java.util.function.Consumer;
 
 /**
- * Typy ograniczone! Część 2!
- *
+ * <h1>Typy ograniczone! Część 2!</h1>
+ * <p>
  * Ograniczałeś już generyki od góry. Fajnie.
  * Ale czy wiedziałeś, że można je również ograniczyć od dołu?
  *
@@ -39,7 +39,7 @@ public class Zadanie6 {
     }
 
     private static void róbCośZWokalistami(List<? extends Wokalista> wokaliści, Consumer<Wokalista> consumer) {
-        for (Wokalista wokalista: wokaliści) {
+        for (Wokalista wokalista : wokaliści) {
             consumer.accept(wokalista);
         }
     }
@@ -107,7 +107,7 @@ public class Zadanie6 {
             Odkomentuj je teraz i zobacz, że nasza metoda przyjmuje List<Integer>, List<Number>, oraz List<Object>.
          */
 
-        List<Integer> integers = Arrays.asList(1,2,3,4,5);
+        List<Integer> integers = Arrays.asList(1, 2, 3, 4, 5);
         demo(integers);
 
         List<Number> numbers = new ArrayList<>(integers);

@@ -2,8 +2,7 @@ package workshop;
 
 /**
  * <h1>Generyki!!!</h1>
- * <p>
- * Poniżej masz klasę Zadanie2. Ugenerycznij ją!
+ * <p>Poniżej masz klasę Zadanie2. Ugenerycznij ją!</p>
  * Chcę aby przechowywała ona 2 zmienne. Jedną typu T, a drugą typu S.
  * Aktualnie przyjmuje tylko jeden typ parametryzowany. Napraw to!
  * <p>

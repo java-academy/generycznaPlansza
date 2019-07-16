@@ -2,82 +2,97 @@ package workshop;
 
 
 /**
- * Bounded Parameters!
- * <p>
- * Let's say we have 3 classes: Person, Singer and ElvisPresley
- * Some people say, that Elvis is still alive, because he was cloned. Fair enough.
- * Our Elvis also will be cloneable.
- * <p>
+ * Typy ograniczone!
  *
- * Important note:
- *      Please do not modify any internal classes/interfaces unless I ask You to do so.
+ * Mamy 2 klasy: Wokalista, oraz ElvisPresley.
+ * Niektórzy twierdzą, że Elvis nadal żyje, ponieważ został sklonowany.
+ * // Im mniej o tym myślisz tym bardziej logiczne się to wydaje.
  *
- * Below you will find method 'cloneSinger'
- * Implement it ;)
+ * Zatem sprawimy, że nasza klasa ElvisPresley również będzie Klonowable.
+ *
+ * Ważna notka:
+ * Proszę nie modyfikuj żadnych klas ani interfejsów, chyba że dalsze polecenia stanowią inaczej.
+ *
+ * Zapoznaj się z interfejsem Klonowable, klasami Wokalista i ElvisPresley, oraz metodą 'main'.
+ * W 'main' wywołana jest metoda 'klonujWokalistę'. Zaimplementuj ją zgodnie z instrukcjami.
  *
  * @author Wojciech Makiela
  */
 public class Zadanie4 {
 
-    interface Cloneable<T> {
-        T createClone();
+    interface Klonowable<T> {
+        T klonuj();
     }
-    static class Singer {
+
+    static class Wokalista {
+        // Nie ruszać!
     }
-    static class ElvisPresley extends Singer implements Cloneable<ElvisPresley> {
+
+    static class ElvisPresley extends Wokalista implements Klonowable<ElvisPresley> {
+        // Nie ruszać!
+        @Override
+        public ElvisPresley klonuj() {
+            return new ElvisPresley();
+        }
 
         @Override
-        public ElvisPresley createClone() {
-            return new ElvisPresley();
+        public String toString() {
+            return "ElvisPresley{}";
         }
     }
 
     public static void main(String[] args) {
-        // Use main method for tests
-        cloneSinger(new ElvisPresley());
+        // Cała logika tego zadania znajdzie się w metodzie 'klonujWokalistę'.
+        // 'main' powstał tylko żeby ułatwić Ci testowanie twoich rozwiązań.
+        System.out.println(klonujWokalistę(new ElvisPresley()));
     }
 
-    private static Cloneable cloneSinger(Cloneable cloneable) {
-        return (Cloneable) cloneable.createClone();
+    private static Klonowable klonujWokalistę(Klonowable klonowable) {
+        return (Klonowable) klonowable.klonuj();
         /*
-        Look at that ugly cast! Why is it here?
-        Delete '(Cloneable)' and read error description.
+        Popatrz na to rzutowanie. Po kiego grzyba ono tu jest?
+        Jak je usuniesz, to dostaniesz błąd. Zrób to, i przeczytaj opis błędu.
 
-        'createClone' method returns Object, not Cloneable. And it makes sense.
-        If you take a look at our Cloneable interface declaration, you can see that 'T' might be anything.
-        And since (almost) everything in Java is an Object, T is considered one as well.
-        Elvis can implement Cloneable<String> and would still work
-        You can fix that by using 'extends' keyword!
+        Metoda 'klonuj' zwraca Object, a nie Klonowable. No i w sumie to ma to sens.
+        Jak zerkniesz na interfejs Klonowable to zobaczysz typ zwrotny 'T', którym może być cokolwiek.
+        W poprzednim zadaniu dowiedziałeś się, że w trakcie kompilacji typy generyczne zastępowane
+        są obiektami (Object). I ma to sens. Wszak (prawie) wszystko w Javie jest obiektem, więc i nasz
+        typ zwrotny 'T' jest traktowany jak obiekt.
 
-        If you define Cloneable as 'Cloneable<T extends Cloneable>, You will be sure that createClone method
-        won't return anything that is not Cloneable.
-        This is the moment when You can modify interface Cloneable ;)
+        Jeśli pomyślimy chwilę nad klonowaniem, to możemy dojść do (szalonego) wniosku:
 
-        It makes sense to think, that if You createClone something, then createClone itself should be cloneable, doesn't it?
-            // This sentence is kinda complex. Feel free to read it again ;P
+            Jeżeli Elvisa dało się sklonować, to tego klona też powinno się dać.
 
-        Once You update Cloneable, this ugly cast won't be necessary... but we are not done here yet!
-        Below you can see an example of parametrized method (returnT(T t)).
-        You do that by defining new type (T) before return type.
-        Now. Once you know how to define type in method, and how to use extends keyword with generics
-        fix 'cloneSinger' method.
-        'cloneSinger' should accept only parameters that are subtype of 'Singer',
-        and that implement 'Cloneable' interface (with generics, we use 'extends' keyword
-        for both classes and interfaces).
+        Tymczasem nasz Elvis może implementować interfejs Klonowable<String> i dalej będzie to działało,
+        choć nie będzie zbyt logiczne. Jeśli mi nie ufasz to sprawdź. Jeśli mi ufasz, to coś z tobą nie tak.
 
-        REMINDER: Do not modify classes/interface. Just 'cloneSinger' method.
+        Możesz to naprawić słówkiem kluczowym 'extends'.
 
-        
-        HINT: Your generic type can extend more that one class. To do that, use '&' ;)
+        Jeśli zmienisz deklarację interfejsu Klonowable<T> na 'Klonowable<T extends Klonowable>'
+        sprawisz, że implementowanie Klonowable<String> nie będzie możliwe.
+        (właściwie Klonowable<cokolwiekCoNieImplementujeKlonowable> nie zadziała)
+        Ważna notka - przy generykach używamy tylko słówka 'extends', nigdy 'implements', niezależnie czy mówimy
+        o klasach, czy interfejsach.
 
+        Jeśli już poprawiłeś interfejs, to czytaj dalej.
 
-        // Bonus: check if you can call 'createClone' method multiple times:
-            return cloneable.createClone().createClone().createClone().createClone();
-           if (youCan) {
-                System.out.println("Great!");
-           } else {
-                System.out.println("Try to fix that");
-           }
+        Poniżej znajdziesz przykład parametryzowanej metody 'returnT(T t)'.
+        Do tej pory w metodach używałeś tylko typów generycznych klasy w której się znajdują (np getter do pola typu T
+        z zadania 2).
+        Istnieje jednak możliwość deklarowania generyków dla pojedynczej metody.
+        Robimy to podobnie jak w przypadku klas -> w nawiasach ostrych podajemy nazwę naszego typu.
+        Nasz zapis '<T>' musi pojawić się w deklaracji metody zaraz przed typem zwrotnym.
+
+        Dobrze. Posiadasz już wiedzę na temat ograniczeń i definicji generyków w metodzie.
+        Użyj tej wiedzy, by finalnie naprawić metodę 'klonujWokalistę'.
+
+        Co jeszcze nie działa?
+
+        Nasza metoda przyjmuje dowonle obiekty które są Klonowable, nawet jeśli nie są wokalistami, i to jest problem.
+        'klonujWokalistę' powinno przyjmować Wokalistów którzy są Klonowable.
+        Aby narzucić więcej niż jedno ograniczenie, jak to robiłeś do tej pory, musisz użyć symbolu '&'.
+        Przykładowo: <T extends Object & Serializable>
+
         */
     }
 

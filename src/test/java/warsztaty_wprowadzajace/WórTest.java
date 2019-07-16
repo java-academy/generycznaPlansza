@@ -1,11 +1,4 @@
-package workshop;
-
-import org.testng.annotations.Test;
-
-import java.util.Arrays;
-import java.util.List;
-
-import static org.testng.Assert.*;
+package warsztaty_wprowadzajace;
 
 public class WórTest {
 

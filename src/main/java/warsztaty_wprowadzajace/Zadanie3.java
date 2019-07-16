@@ -1,4 +1,4 @@
-package workshop;
+package warsztaty_wprowadzajace;
 
 /**
  * <h1>Podsumowanie Zadania1:</h1>

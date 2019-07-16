@@ -1,4 +1,4 @@
-package workshop;
+package warsztaty_wprowadzajace;
 
 
 import java.util.Arrays;

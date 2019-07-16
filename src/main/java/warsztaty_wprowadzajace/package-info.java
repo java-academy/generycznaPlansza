@@ -16,4 +16,4 @@
  *
  * @author Wojciech Makiela
  */
-package workshop;
+package warsztaty_wprowadzajace;

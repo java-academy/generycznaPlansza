@@ -1,8 +1,4 @@
-package workshop;
-
-import org.testng.annotations.Test;
-
-import static org.testng.Assert.*;
+package warsztaty_wprowadzajace;
 
 public class Zadanie2Test {
 

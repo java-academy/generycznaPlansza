@@ -1,4 +1,4 @@
-package start;
+package zadanie_koderskie;
 
 import java.util.List;
 

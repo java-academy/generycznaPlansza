@@ -1,4 +1,4 @@
-package workshop;
+package warsztaty_wprowadzajace;
 
 /**
  * <h1>Teścik!</h1>

@@ -1,5 +1,5 @@
 /**
- * // w IntelliJ naciśnij 'Ctrl' + 'q' aby wyświetlić ze wsparciem dla tagów html.
+ * // w IntelliJ naciśnij 'Ctrl' + 'q' aby wyświetlić ze wsparciem dla znaczników html.
  *
  * <h2>Zasady</h2>
  * W paczce znajdują się dwie klasy

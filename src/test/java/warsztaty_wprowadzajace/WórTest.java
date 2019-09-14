@@ -1,5 +1,13 @@
 package warsztaty_wprowadzajace;
 
+import org.testng.annotations.Test;
+
+import java.util.Arrays;
+import java.util.List;
+
+import static org.testng.Assert.assertSame;
+import static org.testng.AssertJUnit.assertEquals;
+
 public class WórTest {
 
 //    @Test
@@ -19,5 +27,4 @@ public class WórTest {
 //        assertSame(b.getDrugi(), Thread.currentThread());
 //        assertSame(strings, b.getList());
 //    }
-
 }

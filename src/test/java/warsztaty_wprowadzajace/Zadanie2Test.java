@@ -1,5 +1,9 @@
 package warsztaty_wprowadzajace;
 
+import org.testng.annotations.Test;
+
+import static org.testng.Assert.assertTrue;
+
 public class Zadanie2Test {
 
 //    @Test
@@ -34,5 +38,4 @@ public class Zadanie2Test {
 //        // assert
 //        assertTrue(zadanie2.poleTypuT.equals(typ1) && zadanie2.poleTypuS == typ2);
 //    }
-//
 }

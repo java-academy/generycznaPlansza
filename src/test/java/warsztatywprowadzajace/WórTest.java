@@ -1,9 +1,4 @@
-package warsztaty_wprowadzajace;
-
-import org.testng.annotations.Test;
-
-import java.util.Arrays;
-import java.util.List;
+package warsztatywprowadzajace;
 
 import static org.testng.Assert.assertSame;
 import static org.testng.AssertJUnit.assertEquals;

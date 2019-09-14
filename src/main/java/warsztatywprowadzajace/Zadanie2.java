@@ -1,4 +1,4 @@
-package warsztaty_wprowadzajace;
+package warsztatywprowadzajace;
 
 /**
  * <h1>Generyki!!!</h1>

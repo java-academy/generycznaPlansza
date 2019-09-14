@@ -1,6 +1,4 @@
-package warsztaty_wprowadzajace;
-
-import org.testng.annotations.Test;
+package warsztatywprowadzajace;
 
 import static org.testng.Assert.assertTrue;
 

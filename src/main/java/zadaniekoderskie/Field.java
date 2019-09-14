@@ -1,4 +1,4 @@
-package zadanie_koderskie;
+package zadaniekoderskie;
 
 /**
  * @author Jakub Czajka

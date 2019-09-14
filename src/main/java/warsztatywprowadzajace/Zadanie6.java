@@ -1,4 +1,4 @@
-package warsztaty_wprowadzajace;
+package warsztatywprowadzajace;
 
 
 import java.util.ArrayList;

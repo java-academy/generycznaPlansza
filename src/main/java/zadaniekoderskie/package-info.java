@@ -20,4 +20,4 @@
  * @author Jakub Czajka
  * @author Wojciech Makiela
  */
-package zadanie_koderskie;
+package zadaniekoderskie;

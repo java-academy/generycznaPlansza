@@ -1,5 +1,6 @@
 package rojek.patryk.kamil.quiz;
 
+import java.io.IOException;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import rojek.patryk.kamil.quiz.LogReaderHandler.TestCaseFileException;
@@ -7,7 +8,8 @@ import rojek.patryk.kamil.quiz.LogReaderHandler.TestCaseFileException;
 public class LogReaderHandlerTest {
 
   @Test
-  public void readUserInputSteps_shouldReturnExpectedUserInputSteps() throws TestCaseFileException {
+  public void readUserInputSteps_shouldReturnExpectedUserInputSteps()
+      throws TestCaseFileException, IOException {
     String steps = LogReaderHandler.readUserInputTestCaseSteps("log-reader-test-correct");
     String expectedSteps = "1 y y y y 1 1";
 
@@ -15,18 +17,20 @@ public class LogReaderHandlerTest {
   }
 
   @Test(expectedExceptions = TestCaseFileException.class)
-  public void readUserInputSteps_whenNoStepsIncludedInTestCaseFile_shouldThrowTestCaseFileException() throws TestCaseFileException {
+  public void readUserInputSteps_whenNoStepsIncludedInTestCaseFile_shouldThrowTestCaseFileException()
+      throws TestCaseFileException, IOException {
     LogReaderHandler.readUserInputTestCaseSteps("log-reader-test-nosteps");
   }
 
   @Test(expectedExceptions = TestCaseFileException.class)
-  public void readUserInputSteps_whenNoLogsIncluded_shouldThrowTestCaseFileException() throws TestCaseFileException {
+  public void readUserInputSteps_whenNoLogsIncluded_shouldThrowTestCaseFileException()
+      throws TestCaseFileException, IOException {
     LogReaderHandler.readExpectedConsoleLogs("log-reader-test-nologs");
   }
 
   @Test
   public void readExpectedConsoleLogs_shouldReturnExpectedConsleLogsWithoutWhitespaces()
-      throws TestCaseFileException {
+      throws TestCaseFileException, IOException {
     String consoleLogs = LogReaderHandler.readExpectedConsoleLogs("log-reader-test-correct");
     String expectedConsoleLogs = "1:Rozpocznijquiz2:Zmieńilośćpytań3:Opisprojektu";
 

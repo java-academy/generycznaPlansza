@@ -1,0 +1,5 @@
+= Generyki
+
+W tym repozytorium znajdują się różności związane z generykami.
+Pakiety zawierają swoje `package-info.java` z szczegółowymi informacjami
+na ich temat.

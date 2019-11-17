@@ -1,10 +1,17 @@
-package workshop;
+package warsztatywprowadzajace;
 
 /**
- * Time for a Test!
- *
+ * <h1>Teścik!</h1>
+ * <p>
+ * Poniżej znajdziesz zestaw 8 pytań które wyłowiłem z odmętów internetu.
+ * Większość trudności tych pytań kryje się w anglojęzycznym słownictwie, lub trudności
+ * przewidzenia jak zadziała wymazywanie typów. Mają one pokazać Ci nad czym pracować,
+ * więc jeśli nie wiesz - głowa do góry - tak miało być!
+ * <p>
+ * Udziel odpowiedzi, a potem sprawdź w poprzednich zadaniach, lub zgooglaj.
+ * Im więcej pracy włożysz w znalezienie odpowiedzi, tym większa szansa, że ją zapamiętasz ;)
  */
-public class Task7 {
+public class Zadanie7 {
     /*
         1. What Are Some Advantages of Using Generic Types?
         2. What is Type Erasure?
